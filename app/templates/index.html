@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Celestial</title>
+</head>
+<body>
+<div class="hero">
+    <!-- navbar -->
+    <nav class="navbar">
+        <a class="navbar-brand" href="/">
+            <i class="fa fa-sun-o" aria-hidden="true"></i>
+            <strong>Celestial</strong>Movies
+        </a>
+
+        <form onsubmit="get_action(this);">
+            <div class="radio-toolbar">
+                <input type="radio" id="Netlix" name="Provider" value="Netflix" checked>
+                <label for="weekly">Netflix</label>
+                <input type="radio" id="HBO" name="Provider" value="HBO">
+                <label for="now">HBO</label>
+                <input type="text" id="searchText" name="searchText" placeholder="Provider" pattern="^(?=.*/).+" title="Moviename" required>
+                <input type="submit" id="go" value="Search">
+            </div>
+        </form>
+    </nav>
+</div>
+</body>
+</html>
