@@ -24,21 +24,49 @@
         </form>
     </nav>
 </div>
-
 <div class="container">
+    {% for movies in movie_data %}
     <h1>Movie data:</h1>
     <table>
-        {% for key, value in provider_dict.items() %}
+        {% for key, value in movies.items() %}
             <tr>
               <td>
                 <h1>{{ key }}</h1>
               </td>
               <td>
+                {% if key != 'poster_path'%}
                 <h2>{{ value }}</h2>
+                {% else %}  
+                <img src="{{value}}"/>
+                {% endif %}
               </td>
             </tr>
         {% endfor %}
-      </table>
+    </table>
+    <br><br>
+    {% endfor %}
+</div>
+<div class="container">
+    <h1>Provider:</h1>
+    {% for providers in provider_list %}
+    <table>
+        {% for key, value in providers.items() %}
+            <tr>
+              <td>
+                <h1>{{ key }}</h1>
+              </td>
+              <td>
+                {% if key != 'logo_path'%}
+                <h2>{{ value }}</h2>
+                {% else %}  
+                <img src="{{value}}"/>
+                {% endif %}
+              </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    {% endfor %}
 </div>
 </body>
 </html>

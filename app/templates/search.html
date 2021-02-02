@@ -26,19 +26,27 @@
 </div>
 
 <div class="container">
+    {% for movies in movie_list %}
     <h1>Movie data:</h1>
     <table>
-        {% for key, value in movie_dict.items() %}
+        {% for key, value in movies.items() %}
             <tr>
               <td>
                 <h1>{{ key }}</h1>
               </td>
               <td>
+                {% if key != 'poster_path'%}
                 <h2>{{ value }}</h2>
+                {% else %}
+                <a href=/movie/{{movies['id']}}>
+                <img src="{{movies['poster_path']}}"/></a>
+                {% endif %}
               </td>
             </tr>
         {% endfor %}
-      </table>
+    </table>
+    <br><br>
+    {% endfor %}
 </div>
 </body>
 </html>
