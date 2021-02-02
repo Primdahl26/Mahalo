@@ -24,5 +24,21 @@
         </form>
     </nav>
 </div>
+
+<div class="container">
+    <h1>Movie data:</h1>
+    <table>
+        {% for key, value in provider_dict.items() %}
+            <tr>
+              <td>
+                <h1>{{ key }}</h1>
+              </td>
+              <td>
+                <h2>{{ value }}</h2>
+              </td>
+            </tr>
+        {% endfor %}
+      </table>
+</div>
 </body>
 </html>
