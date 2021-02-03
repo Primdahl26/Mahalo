@@ -19,8 +19,8 @@ pip install -r req.txt
 6. Finally run the application
 - in git bash:
 python run.py
-7. You can now connect to the besite on your localhost: 
-http://localhost:1337
+7. You can now connect to the wesite on your localhost: 
+- http://localhost:1337
 
 IMPORTANT!
 - To run the app - create a .env file containing the API key in the following format:
