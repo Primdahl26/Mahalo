@@ -18,11 +18,40 @@
                 <label for="weekly">Netflix</label>
                 <input type="radio" id="HBO" name="Provider" value="HBO">
                 <label for="now">HBO</label>
+                <input type="radio" id="Any" name="Provider" value="Any">
+                <label for="now">Any</label>
                 <input type="text" id="searchText" name="searchText" placeholder="Movie" title="Movie" required>
                 <input type="submit" id="go" value="Search">
             </div>
         </form>
     </nav>
 </div>
+<div class="container">
+    <h1>Top rated movies!</h1>
+    {% for movies in top_rated_list %}
+    <h1>Movie data:</h1>
+    <table>
+        {% for key, value in movies.items() %}
+            <tr>
+              <td>
+                <h1>{{ key }}</h1>
+              </td>
+              <td>
+                {% if key != 'poster_path'%}
+                <h2>{{ value }}</h2>
+                {% else %}
+                <a href=/movie/{{movies['id']}}>
+                <img src="{{movies['poster_path']}}"/></a>
+                {% endif %}
+              </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    {% endfor %}
+</div>       
+<form method="post" action="/">
+    <input type="submit" name="Next" value="Next">
+</form>
 </body>
 </html>

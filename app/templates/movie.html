@@ -18,6 +18,8 @@
                 <label for="weekly">Netflix</label>
                 <input type="radio" id="HBO" name="Provider" value="HBO">
                 <label for="now">HBO</label>
+                <input type="radio" id="Any" name="Provider" value="Any">
+                <label for="now">Any</label>
                 <input type="text" id="searchText" name="searchText" placeholder="Movie" title="Movie" required>
                 <input type="submit" id="go" value="Search">
             </div>
@@ -47,8 +49,8 @@
     {% endfor %}
 </div>
 <div class="container">
+  {% for providers in provider_list %}
     <h1>Provider:</h1>
-    {% for providers in provider_list %}
     <table>
         {% for key, value in providers.items() %}
             <tr>
