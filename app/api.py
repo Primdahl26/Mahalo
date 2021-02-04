@@ -38,7 +38,6 @@ def get_movie_search_list(keyword):
 
 
 # TODO: Make it support more than danish & more than flatrate
-
 # Right now it only gets danish providers & it only gets flatrate options (streaming as netflix)
 def get_movie_provider_list(movie_id):
 
@@ -53,9 +52,9 @@ def get_movie_provider_list(movie_id):
                 temp_dict = {'id' : element['provider_id'], 'name': element['provider_name'], 'logo_path': 'https://image.tmdb.org/t/p/original' + element['logo_path']}
                 provider_list.append(temp_dict)
         else:
-            provider_list.append({'Providers' : 'None in DK'})
+            provider_list.append({'Providers' : 'None_DK'})
     else:
-        provider_list.append({'Providers' : 'None in DK'})
+        provider_list.append({'Providers' : 'None_DK'})
 
     return provider_list
 
@@ -110,3 +109,25 @@ def get_top_rated_movies_list(page):
             top_rated_movie_list.append(temp_dict)
 
     return top_rated_movie_list
+
+# Takes a list of movies, and returns only the movies that are streamable
+# on the provider in the parameter
+def get_movie_list_specific_provider(movie_list, provider):
+
+    specific_movie_list = []
+    
+    if provider == 'Netflix':
+        for element in movie_list:
+            for item in get_movie_provider_list(element['id']):
+                if 'name' in item:
+                    if item['name'] == 'Netflix':
+                        specific_movie_list.append(element)
+
+    elif provider == 'HBO':
+        for element in movie_list:
+            for item in get_movie_provider_list(element['id']):
+                if 'name' in item:
+                    if item['name'] == 'HBO':
+                        specific_movie_list.append(element)
+
+    return specific_movie_list

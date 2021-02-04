@@ -9,7 +9,7 @@ Setup:
 - in git bash:
 python -m venv venv
 - in git bash:
-source venv/scripts/activate
+source venv/Scripts/activate
 
 first command creates virtual env and second enables
 

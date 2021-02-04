@@ -12,33 +12,32 @@
             <strong>Celestial</strong>Movies
         </a>
 
-        <form action="/search", method = "POST">
+        <form action="/search" method="POST">
             <div class="radio-toolbar">
-                <input type="radio" id="Netlix" name="Provider" value="Netflix" checked>
-                <label for="weekly">Netflix</label>
-                <input type="radio" id="HBO" name="Provider" value="HBO">
-                <label for="now">HBO</label>
-                <input type="radio" id="Any" name="Provider" value="Any">
-                <label for="now">Any</label>
-                <input type="text" id="searchText" name="searchText" placeholder="Movie" title="Movie" required>
+                <input type="text" id="search_text" name="search_text" placeholder="Movie" title="Movie" required>
                 <input type="submit" id="go" value="Search">
             </div>
         </form>
+        <form action="/search" method="POST">
+            <input type="radio" id="Any" name="Provider" value="Any">Any</input>
+            <input type="radio" id="Netflix" name="Provider" value="Netflix">Netflix</input>
+            <input type="radio" id="HBO" name="Provider" value="HBO">HBO</input>
+            <input type="submit" name="Filter" value="Filter">
+        </form>
     </nav>
-</div>
-
 <div class="container">
+    <h1>Results for: {{keyword}}</h1>
     {% for movies in movie_list %}
     <h1>Movie data:</h1>
     <table>
         {% for key, value in movies.items() %}
             <tr>
               <td>
-                <h1>{{ key }}</h1>
+                <h2>{{ key }}</h1>
               </td>
               <td>
                 {% if key != 'poster_path'%}
-                <h2>{{ value }}</h2>
+                <h3>{{ value }}</h2>
                 {% else %}
                 <a href=/movie/{{movies['id']}}>
                 <img src="{{movies['poster_path']}}"/></a>
