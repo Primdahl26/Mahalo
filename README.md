@@ -4,7 +4,7 @@ Setup:
 1. Download python
 2. Use git bash to clone the repo
 3. Clone the gihub repo
-- in git bash: git clone https://github.com/Primdahl26/Celestial
+- in git bash: git clone https://github.com/Primdahl26/Mahalo
 4. Setup and activate virtualenv:
 - in git bash:
 python -m venv venv
