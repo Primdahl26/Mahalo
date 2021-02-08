@@ -24,11 +24,12 @@ main = Blueprint("main", __name__)
 
 # TODO: Find way to not use global variables
 top_rated_movie_page = 1
+provider = 'Any'
 
 @main.route('/', methods=['POST', 'GET'])
 def index():
 
-    provider = 'Any'
+    global provider
     global top_rated_movie_page
     top_rated_list = get_top_rated_movies_list(top_rated_movie_page)
     
@@ -41,6 +42,17 @@ def index():
             top_rated_movie_page += 1
             top_rated_list = get_top_rated_movies_list(top_rated_movie_page)
 
+            if provider != 'Any':
+                top_rated_list = get_movie_list_specific_provider(top_rated_list, provider)
+
+
+        elif 'Previous' in request.form:
+            top_rated_movie_page = top_rated_movie_page - 1
+            top_rated_list = get_top_rated_movies_list(top_rated_movie_page)
+            
+            if provider != 'Any':
+                top_rated_list = get_movie_list_specific_provider(top_rated_list, provider)
+
         elif 'Filter' in request.form:
             if request.form.get('Provider') == 'Netflix':
                 provider = 'Netflix'
@@ -49,6 +61,10 @@ def index():
             elif request.form.get('Provider') == 'HBO':
                 provider = 'HBO'
                 top_rated_list = get_movie_list_specific_provider(top_rated_list, 'HBO')
+
+            elif request.form.get('Provider') == 'Viaplay':
+                provider = 'Viaplay'
+                top_rated_list = get_movie_list_specific_provider(top_rated_list, 'Viaplay')
 
             elif request.form.get('Provider') == 'Any':
                 provider = 'Any'
@@ -78,6 +94,7 @@ movie_list = []
 @main.route('/search', methods=['POST', 'GET'])
 def search():
 
+    global provider
     global result
     global movie_list
 
@@ -85,6 +102,9 @@ def search():
         if 'search_text' in request.form:
             result = request.form['search_text']
             movie_list = get_movie_search_list(result)
+
+            if provider != 'Any':
+                movie_list = get_movie_list_specific_provider(movie_list, provider)
 
         elif 'Filter' in request.form:
             if request.form.get('Provider') == 'Netflix':
@@ -95,11 +115,16 @@ def search():
                 provider = 'HBO'
                 movie_list = get_movie_list_specific_provider(movie_list, 'HBO')
 
+            elif request.form.get('Provider') == 'Viaplay':
+                provider = 'Viaplay'
+                top_rated_list = get_movie_list_specific_provider(top_rated_list, 'Viaplay')
+                
             elif request.form.get('Provider') == 'Any':
+                provider = 'Any'
                 movie_list = get_movie_search_list(result)
                 
-        return render_template('search.html', movie_list=movie_list, keyword=result)
+        return render_template('search.html', movie_list=movie_list, keyword=result, provider=provider)
     
     else:
-        return render_template('index.html')
+        return redirect('/')
 

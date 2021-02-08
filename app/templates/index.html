@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Celestial</title>
+    <title>Mahalo</title>
 </head>
 <body>
 <div class="hero">
@@ -9,7 +9,7 @@
     <nav class="navbar">
         <a class="navbar-brand" href="/">
             <i class="fa fa-sun-o" aria-hidden="true"></i>
-            <strong>Celestial</strong>Movies
+            <strong>Mahalo</strong>Movies
         </a>
 
         <form action="/search" method="POST">
@@ -19,9 +19,10 @@
             </div>
         </form>
         <form action="/" method="POST">
-            <input type="radio" id="Any" name="Provider" value="Any">Any</input>
-            <input type="radio" id="Netflix" name="Provider" value="Netflix">Netflix</input>
-            <input type="radio" id="HBO" name="Provider" value="HBO">HBO</input>
+            <input type="radio" id="Any" name="Provider" value="Any" {% if provider == 'Any' %} checked="checked" {% endif %}>Any</input>
+            <input type="radio" id="Netflix" name="Provider" value="Netflix" {% if provider == 'Netflix' %} checked="checked" {% endif %}>Netflix</input>
+            <input type="radio" id="HBO" name="Provider" value="HBO" {% if provider == 'HBO' %} checked="checked" {% endif %}>HBO</input>
+            <input type="radio" id="Viaplay" name="Provider" value="Viaplay" {% if provider == 'Viaplay' %} checked="checked" {% endif %}>Viaplay</input>
             <input type="submit" name="Filter" value="Filter">
         </form>
     </nav>
@@ -47,10 +48,11 @@
             </tr>
         {% endfor %}
     </table>
-    <br><br>
+    <hr>
     {% endfor %}
-</div>       
+</div>    
 <form action="/" method="POST">
+    <input type="submit" name="Previous" value="Previous">
     <input type="submit" name="Next" value="Next">
 </form>
 </body>
