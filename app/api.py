@@ -58,7 +58,6 @@ def get_movie_provider_list(movie_id):
 
     return provider_list
 
-
 def get_movie_from_id(movie_id):
 
     search_api_url = f'https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}'+ language_url
@@ -68,7 +67,8 @@ def get_movie_from_id(movie_id):
         'id' : data['id'],
         'title' : data['title'],
         'release_date' : data['release_date'],
-        'overview' : data['overview']
+        'overview' : data['overview'],
+        'genres' : data['genres']
     }]
 
     if data['poster_path'] is not None:
@@ -126,3 +126,15 @@ def get_movie_list_specific_provider(movie_list, provider):
                     specific_movie_list.append(element)
 
     return specific_movie_list
+
+
+def get_genres(movie_list):
+    search_api_url = f'https://api.themoviedb.org/3/genre/movie/list?api_key={api_key}'+ language_url
+    data = requests.get(search_api_url).json()
+
+    genre_list = []
+
+    for element in data['genres']:
+        genre_list.append(element)
+
+    return genre_list

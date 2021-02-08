@@ -11,14 +11,13 @@
             <i class="fa fa-sun-o" aria-hidden="true"></i>
             <strong>Mahalo</strong>Movies
         </a>
-
-        <form action="/search" method="POST">
+        <form id="form" method="POST" onsubmit='javascript: window.location.replace("/search?q="+ document.getElementById("search_text").value); return false;'>
             <div class="radio-toolbar">
                 <input type="text" id="search_text" name="search_text" placeholder="Movie" title="Movie" required>
                 <input type="submit" id="go" value="Search">
             </div>
         </form>
-        <form action="/" method="POST">
+        <form id="form" action="" method="POST">
             <input type="radio" id="Any" name="Provider" value="Any" {% if provider == 'Any' %} checked="checked" {% endif %}>Any</input>
             <input type="radio" id="Netflix" name="Provider" value="Netflix" {% if provider == 'Netflix' %} checked="checked" {% endif %}>Netflix</input>
             <input type="radio" id="HBO" name="Provider" value="HBO" {% if provider == 'HBO' %} checked="checked" {% endif %}>HBO</input>
