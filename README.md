@@ -1,4 +1,4 @@
-# Celestial
+# Mahalo
 
 Setup:
 1. Download python

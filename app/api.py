@@ -116,18 +116,12 @@ def get_movie_list_specific_provider(movie_list, provider):
 
     specific_movie_list = []
     
-    if provider == 'Netflix':
-        for element in movie_list:
-            for item in get_movie_provider_list(element['id']):
-                if 'name' in item:
-                    if item['name'] == 'Netflix':
-                        specific_movie_list.append(element)
-
-    elif provider == 'HBO':
-        for element in movie_list:
-            for item in get_movie_provider_list(element['id']):
-                if 'name' in item:
-                    if item['name'] == 'HBO':
-                        specific_movie_list.append(element)
+    for element in movie_list:
+        for item in get_movie_provider_list(element['id']):
+            if 'name' in item:
+                # We only want to put movies in the list if the provider matches
+                # the one passed from our parameter
+                if item['name'] == provider:
+                    specific_movie_list.append(element)
 
     return specific_movie_list

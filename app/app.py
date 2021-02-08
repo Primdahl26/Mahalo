@@ -22,6 +22,7 @@ from .api import (
 
 main = Blueprint("main", __name__)
 
+# TODO: Find way to not use global variables
 top_rated_movie_page = 1
 
 @main.route('/', methods=['POST', 'GET'])
@@ -69,17 +70,23 @@ def movie_id(movie_id):
 def roulettte():
     return 'placeholder for roulette'
 
-# TODO: Fix so this can filter through the movie list too
-# i get 400 bad request when i try to filter a movie in the search
-# i think it might be because flask cannot find Filter in request.form
+
+# TODO: Find way to not use global variables
+result = ''
+movie_list = []
+
 @main.route('/search', methods=['POST', 'GET'])
 def search():
-    
-    result = request.form['search_text']
-    movie_list = get_movie_search_list(result)
+
+    global result
+    global movie_list
 
     if request.method == 'POST':
-        if 'Filter' in request.form:
+        if 'search_text' in request.form:
+            result = request.form['search_text']
+            movie_list = get_movie_search_list(result)
+
+        elif 'Filter' in request.form:
             if request.form.get('Provider') == 'Netflix':
                 provider = 'Netflix'
                 movie_list = get_movie_list_specific_provider(movie_list, 'Netflix')
@@ -89,8 +96,6 @@ def search():
                 movie_list = get_movie_list_specific_provider(movie_list, 'HBO')
 
             elif request.form.get('Provider') == 'Any':
-                result = request.form['search_text']
-                provider = 'Any'
                 movie_list = get_movie_search_list(result)
                 
         return render_template('search.html', movie_list=movie_list, keyword=result)
