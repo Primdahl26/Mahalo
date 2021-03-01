@@ -32,10 +32,11 @@ def index():
 
     global provider
     global top_rated_movie_page
-    top_rated_list = get_top_rated_movies_list(top_rated_movie_page)
-    
+
     if request.method == 'GET':
         top_rated_movie_page = 1
+
+    top_rated_list = get_top_rated_movies_list(top_rated_movie_page)
 
     if request.method == 'POST':
         if 'Next' in request.form:
@@ -59,6 +60,7 @@ def index():
                 top_rated_list = get_top_rated_movies_list(top_rated_movie_page)
             else:
                 top_rated_list = get_movie_list_specific_provider(top_rated_list, provider)
+        
 
     return render_template('index.html', top_rated_list=top_rated_list, page_number=top_rated_movie_page, provider=provider)
 
