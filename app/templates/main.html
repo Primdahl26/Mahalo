@@ -1,0 +1,126 @@
+<!--doctype html-->
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mahalo</title>
+	<!--style----->
+	<style>
+		body{font-family:poppins;}
+	</style>
+    <link rel="stylesheet" href="static/css/main.css"/>
+    <link rel="stylesheet" href="static/css/lightslider.css"/>
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+    <script src="static/js/JQuery3.3.1.js"></script>
+    <script src="static/js/lightslider.js"></script>
+</head>
+<body>
+ <!--navigation-------------->
+ <nav>
+    <!--logo--------------->
+    <a href="/" class="logo">
+        <img src="static/img/Mahalo-Logo-Clean.svg"/>
+    </a>
+    <!--TODO: Make it so the menu choices dont dissapear after page is made shorter-------------->
+    <!--menu-------------->
+    <form id="form" action="" method="POST">
+        <ul class="menu">
+            <input type="radio" id="Any" name="Provider" value="Any" {% if provider == 'Any' %} checked="checked" {% endif %}>Any</input>
+            <input type="radio" id="Netflix" name="Provider" value="Netflix" {% if provider == 'Netflix' %} checked="checked" {% endif %}>Netflix</input>
+            <input type="radio" id="HBO" name="Provider" value="HBO" {% if provider == 'HBO' %} checked="checked" {% endif %}>HBO</input>
+            <input type="radio" id="Viaplay" name="Provider" value="Viaplay" {% if provider == 'Viaplay' %} checked="checked" {% endif %}>Viaplay</input>
+            <input type="submit" name="Filter" value="Filter">
+        </ul>
+    </form>
+
+    <!--search------------->
+    <form id="form" method="POST" onsubmit='javascript: window.location.replace("/search?q="+ document.getElementById("search_text").value); return false;'>
+        <div class="search">
+            <input type="text" id="search_text" name="search_text" placeholder="Find Your Favourtie Movies" title="Movie" required>
+            <!--search-icon----------->
+            <button id="go" value="search">
+                <img src="static/img/search.png" width="20px" height="20px">
+            </button>
+        </div>
+    </form>
+
+</nav>
+<section id="main">
+<!--showcase----------------------->
+<!--heading------------->
+<h1 class="showcase-heading">Top Rated Movies</h1>
+        
+<ul id="autoWidth">
+
+    <!--showcase-box------------------->
+    {% for movie in top_rated_movies %}
+   <div class="showcase-box">
+       <a href=/movie/{{movie['id']}}>
+       <img src="{{movie['poster_path']}}"/></a>
+   </div>
+    {% endfor %}
+  </ul>
+<br>
+</section>
+<!--latest-movies---------------------->
+<section id="latest">
+    <h2 class="latest-heading">Upcoming Movies</h2>
+    <!--slider------------------->
+    <ul id="autoWidth2">
+        <!--slide-box-1------------------>
+        {% for movie in upcoming_movies %}
+        <li class="item-a">
+            <div class="latest-box">
+                <!--img-------->
+                <div class="latest-b-img">
+                    <a href=/movie/{{movie['id']}}>
+                    <img src="{{movie['poster_path']}}"/></a>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+      </ul>
+</section>
+<!--latest-movies---------------------->
+<section id="latest">
+    <h2 class="latest-heading">Popular Movies</h2>
+    <!--slider------------------->
+    <ul id="autoWidth2">
+        <!--slide-box-1------------------>
+        {% for movie in popular_movies %}
+        <li class="item-a">
+            <div class="latest-box">
+                <!--img-------->
+                <div class="latest-b-img">
+                    <a href=/movie/{{movie['id']}}>
+                    <img src="{{movie['poster_path']}}"/></a>
+                </div>
+                <!--text---------->
+            </div>
+        </li>
+        {% endfor %}
+      </ul>
+</section>
+<script>
+    $(document).ready(function() {
+        $('#autoWidth,#autoWidth2').lightSlider({
+            autoWidth:true,
+            loop:true,
+    onSliderLoad: function() {
+        $('#autoWidth,#autoWidth2').removeClass('cS-hidden');
+        } 
+    });  
+  });
+</script>
+<!--btns--------------->
+<div class="btns">
+    <a href="#">Previous</a>
+    <a href="#">Next</a>
+</div>
+<!--footer------------------>
+<footer>
+    <p>Bla bla bla</p>
+    <p>Copyright 2021 - Mahalo</p>
+</footer>
+
+</body>
+</html>

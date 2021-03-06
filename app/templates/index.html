@@ -17,6 +17,7 @@
                 <input type="submit" id="go" value="Search">
             </div>
         </form>
+        
         <form id="form" action="" method="POST">
             <input type="radio" id="Any" name="Provider" value="Any" {% if provider == 'Any' %} checked="checked" {% endif %}>Any</input>
             <input type="radio" id="Netflix" name="Provider" value="Netflix" {% if provider == 'Netflix' %} checked="checked" {% endif %}>Netflix</input>
@@ -37,7 +38,7 @@
                 <h2>{{ key }}</h1>
               </td>
               <td>
-                {% if key != 'poster_path'%}
+                {% if key != 'poster_path' %}
                 <h3>{{ value }}</h2>
                 {% else %}
                 <a href=/movie/{{movies['id']}}>
